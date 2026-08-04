@@ -1,0 +1,116 @@
+---
+const links = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#servicios", label: "Servicios" },
+  { href: "#nosotros", label: "Nosotros" },
+  { href: "#clientes", label: "Clientes" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 transition-all duration-300" id="header-inner">
+    <a href="#inicio" class="flex items-center gap-2 group">
+      <span class="font-display text-2xl tracking-wide text-white">INTERMEDIOS</span>
+      <span class="font-display text-2xl tracking-wide text-brand-red group-hover:text-brand-redLight transition-colors">GRÁFICA</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-10">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="relative font-mono text-sm text-smoke hover:text-white transition-colors py-2 group"
+        >
+          {link.label}
+          <span class="absolute left-0 -bottom-0.5 h-px w-0 bg-brand-red transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      ))}
+    </nav>
+
+    <a
+      href="https://wa.me/5493512288814"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hidden md:inline-flex items-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-semibold text-sm px-5 py-2.5 transition-all duration-300 hover:-translate-y-0.5"
+    >
+      Cotizar ahora
+    </a>
+
+    <button
+      id="menu-toggle"
+      class="md:hidden text-white w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+      aria-label="Abrir menú"
+    >
+      <span id="bar1" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span id="bar2" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span id="bar3" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden max-h-0 overflow-hidden bg-ink/98 backdrop-blur border-t border-line transition-all duration-500 ease-in-out"
+  >
+    <nav class="flex flex-col px-6 py-6 gap-1">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-link font-mono text-base text-smoke hover:text-white py-3 border-b border-line/60"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="https://wa.me/5493512288814"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-5 text-center bg-brand-red text-white font-semibold px-5 py-3"
+      >
+        Cotizar por WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const headerInner = document.getElementById("header-inner");
+
+  const onScroll = () => {
+    if (!header || !headerInner) return;
+    if (window.scrollY > 40) {
+      header.classList.add("bg-ink/90", "backdrop-blur", "border-line");
+      headerInner.classList.add("h-16");
+      headerInner.classList.remove("h-20");
+    } else {
+      header.classList.remove("bg-ink/90", "backdrop-blur", "border-line");
+      headerInner.classList.remove("h-16");
+      headerInner.classList.add("h-20");
+    }
+  };
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const bar1 = document.getElementById("bar1");
+  const bar2 = document.getElementById("bar2");
+  const bar3 = document.getElementById("bar3");
+  let open = false;
+
+  const setMenu = (state: boolean) => {
+    open = state;
+    if (!menu) return;
+    menu.style.maxHeight = open ? menu.scrollHeight + "px" : "0px";
+    bar1?.classList.toggle("rotate-45", open);
+    bar1?.classList.toggle("translate-y-2", open);
+    bar2?.classList.toggle("opacity-0", open);
+    bar3?.classList.toggle("-rotate-45", open);
+    bar3?.classList.toggle("-translate-y-2", open);
+  };
+
+  toggle?.addEventListener("click", () => setMenu(!open));
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => setMenu(false));
+  });
+</script>

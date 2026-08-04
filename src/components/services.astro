@@ -1,0 +1,85 @@
+---
+const categories = [
+  {
+    num: "01",
+    title: "Gráfica",
+    tagline: "Diseño e impresión",
+    desc: "Todo lo que tu marca necesita en papel: identidad, tarjetería y material de difusión.",
+    items: ["Diseño gráfico", "Impresiones", "Tarjetas personales", "Volantes", "Cartas comerciales"],
+  },
+  {
+    num: "02",
+    title: "Cartelería",
+    tagline: "Fabricación e instalación",
+    desc: "Carteles y letras fabricados a medida, en los materiales que mejor representen tu negocio.",
+    items: [
+      "Letras en chapa",
+      "Polifán",
+      "Telgopor",
+      "Acrílico",
+      "MDF",
+      "Lonas",
+      "Vinilos",
+      "Carteles iluminados",
+      "Retroiluminados",
+    ],
+  },
+  {
+    num: "03",
+    title: "Indumentaria",
+    tagline: "Estampado y sublimación",
+    desc: "Personalización de prendas propias o de catálogo, lista para uso o reventa.",
+    items: ["Estampado DTF", "Sublimación", "Venta de prendas", "Impresión personalizada DTF"],
+  },
+];
+---
+
+<section id="servicios" class="relative py-28 border-t border-line">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-16" data-reveal>
+      <div>
+        <p class="font-mono text-brand-red text-sm tracking-[0.3em] mb-4">// SERVICIOS</p>
+        <h2 class="font-display text-4xl md:text-6xl text-white leading-none">LO QUE HACEMOS</h2>
+      </div>
+      <p class="max-w-sm text-smoke text-sm md:text-base">
+        Tres áreas, un mismo estándar de calidad: gráfica, cartelería e indumentaria.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-px bg-line">
+      {categories.map((c, i) => (
+        <div
+          class="group relative bg-ink p-8 md:p-10 flex flex-col overflow-hidden"
+          data-reveal
+          style={`transition-delay:${i * 100}ms`}
+        >
+          <div class="absolute inset-0 bg-gradient-to-b from-brand-red/0 to-brand-red/0 group-hover:from-brand-red/10 group-hover:to-transparent transition-all duration-500"></div>
+
+          <span class="absolute top-4 left-4 w-3 h-3 border-t-2 border-l-2 border-line group-hover:border-brand-red transition-colors duration-300"></span>
+          <span class="absolute bottom-4 right-4 w-3 h-3 border-b-2 border-r-2 border-line group-hover:border-brand-red transition-colors duration-300"></span>
+
+          <div class="relative">
+            <span class="font-mono text-smoke text-sm">{c.num}</span>
+            <h3 class="font-display text-3xl md:text-4xl text-white mt-4 group-hover:text-brand-red transition-colors duration-300">
+              {c.title}
+            </h3>
+            <p class="font-mono text-xs text-brand-red mt-2 tracking-wide uppercase">{c.tagline}</p>
+            <p class="text-smoke text-sm leading-relaxed mt-5">{c.desc}</p>
+          </div>
+
+          <div class="relative mt-7 h-px bg-line overflow-hidden">
+            <div class="h-full w-0 bg-brand-red group-hover:w-full transition-all duration-500"></div>
+          </div>
+
+          <ul class="relative mt-7 flex flex-wrap gap-2">
+            {c.items.map((item) => (
+              <li class="font-mono text-xs text-white/70 border border-line px-3 py-1.5 group-hover:border-brand-red/50 transition-colors duration-300">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
