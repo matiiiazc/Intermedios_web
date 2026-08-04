@@ -8,21 +8,17 @@ const links = [
 ];
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 transition-all duration-300" id="header-inner">
-    <a href="#inicio" class="flex items-center gap-2 group">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 transition-[height] duration-300" id="header-inner">
+    <a href="#inicio" class="flex items-center gap-2">
       <span class="font-display text-2xl tracking-wide text-white">INTERMEDIOS</span>
-      <span class="font-display text-2xl tracking-wide text-brand-red group-hover:text-brand-redLight transition-colors">GRÁFICA</span>
+      <span class="font-display text-2xl tracking-wide text-brand-red">GRÁFICA</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-10">
+    <nav class="hidden md:flex items-center gap-9">
       {links.map((link) => (
-        <a
-          href={link.href}
-          class="relative font-mono text-sm text-smoke hover:text-white transition-colors py-2 group"
-        >
+        <a href={link.href} class="nav-link">
           {link.label}
-          <span class="absolute left-0 -bottom-0.5 h-px w-0 bg-brand-red transition-all duration-300 group-hover:w-full"></span>
         </a>
       ))}
     </nav>
@@ -31,31 +27,31 @@ const links = [
       href="https://wa.me/5493512288814"
       target="_blank"
       rel="noopener noreferrer"
-      class="hidden md:inline-flex items-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-semibold text-sm px-5 py-2.5 transition-all duration-300 hover:-translate-y-0.5"
+      class="btn-primary hidden md:inline-flex !px-5 !py-2.5 text-sm"
     >
       Cotizar ahora
     </a>
 
     <button
       id="menu-toggle"
-      class="md:hidden text-white w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+      class="md:hidden text-white w-10 h-10 flex flex-col items-center justify-center gap-[5px]"
       aria-label="Abrir menú"
     >
-      <span id="bar1" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span id="bar2" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span id="bar3" class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span id="bar1" class="block w-5 h-px bg-white transition-transform duration-300"></span>
+      <span id="bar2" class="block w-5 h-px bg-white transition-opacity duration-300"></span>
+      <span id="bar3" class="block w-5 h-px bg-white transition-transform duration-300"></span>
     </button>
   </div>
 
   <div
     id="mobile-menu"
-    class="md:hidden max-h-0 overflow-hidden bg-ink/98 backdrop-blur border-t border-line transition-all duration-500 ease-in-out"
+    class="md:hidden max-h-0 overflow-hidden bg-ink/98 backdrop-blur border-t border-line transition-[max-height] duration-500 ease-in-out"
   >
     <nav class="flex flex-col px-6 py-6 gap-1">
       {links.map((link) => (
         <a
           href={link.href}
-          class="mobile-link font-mono text-base text-smoke hover:text-white py-3 border-b border-line/60"
+          class="mobile-link font-mono text-base text-smoke hover:text-white transition-colors duration-300 py-3 border-b border-line-soft"
         >
           {link.label}
         </a>
@@ -64,7 +60,7 @@ const links = [
         href="https://wa.me/5493512288814"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-5 text-center bg-brand-red text-white font-semibold px-5 py-3"
+        class="btn-primary justify-center mt-5"
       >
         Cotizar por WhatsApp
       </a>
@@ -79,11 +75,11 @@ const links = [
   const onScroll = () => {
     if (!header || !headerInner) return;
     if (window.scrollY > 40) {
-      header.classList.add("bg-ink/90", "backdrop-blur", "border-line");
+      header.classList.add("bg-ink/85", "backdrop-blur", "border-line");
       headerInner.classList.add("h-16");
       headerInner.classList.remove("h-20");
     } else {
-      header.classList.remove("bg-ink/90", "backdrop-blur", "border-line");
+      header.classList.remove("bg-ink/85", "backdrop-blur", "border-line");
       headerInner.classList.remove("h-16");
       headerInner.classList.add("h-20");
     }
@@ -103,10 +99,10 @@ const links = [
     if (!menu) return;
     menu.style.maxHeight = open ? menu.scrollHeight + "px" : "0px";
     bar1?.classList.toggle("rotate-45", open);
-    bar1?.classList.toggle("translate-y-2", open);
+    bar1?.classList.toggle("translate-y-[6px]", open);
     bar2?.classList.toggle("opacity-0", open);
     bar3?.classList.toggle("-rotate-45", open);
-    bar3?.classList.toggle("-translate-y-2", open);
+    bar3?.classList.toggle("-translate-y-[6px]", open);
   };
 
   toggle?.addEventListener("click", () => setMenu(!open));

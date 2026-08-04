@@ -7,8 +7,8 @@ export interface Props {
 }
 
 const {
-  title = "Intermedios | Cartelería, Grafica y Indumentaria",
-  description = "Especialistas en cartelería: letreros, letras corpóreas, Banners, vinilo impreso y Retro iluminados.",
+  title = "Intermedios |  Grafica y Cartelería ",
+  description = "Especialistas en cartelería: letreros, letras corpóreas, gráfica vehicular, vinilo impreso y señalización.",
 } = Astro.props;
 ---
 
@@ -29,7 +29,7 @@ const {
 
     <slot name="head" />
   </head>
-  <body class="bg-ink text-white font-body antialiased selection:bg-brand-red selection:text-white overflow-x-hidden">
+  <body class="bg-ink text-white font-body antialiased overflow-x-hidden">
     <slot />
 
     <script>
@@ -63,53 +63,3 @@ const {
     </script>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    scroll-behavior: smooth;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0a0a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #e11d2e;
-    border-radius: 999px;
-  }
-
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  [data-reveal].is-revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  [data-reveal="left"] {
-    transform: translateX(-32px);
-  }
-  [data-reveal="left"].is-revealed {
-    transform: translateX(0);
-  }
-  [data-reveal="right"] {
-    transform: translateX(32px);
-  }
-  [data-reveal="right"].is-revealed {
-    transform: translateX(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal] {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-    :root {
-      scroll-behavior: auto;
-    }
-  }
-</style>

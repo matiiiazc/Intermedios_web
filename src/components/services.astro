@@ -38,42 +38,37 @@ const categories = [
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="flex items-end justify-between flex-wrap gap-6 mb-16" data-reveal>
       <div>
-        <p class="font-mono text-brand-red text-sm tracking-[0.3em] mb-4">// SERVICIOS</p>
-        <h2 class="font-display text-4xl md:text-6xl text-white leading-none">LO QUE HACEMOS</h2>
+        <p class="eyebrow mb-4">Servicios</p>
+        <h2 class="section-title">LO QUE HACEMOS</h2>
       </div>
       <p class="max-w-sm text-smoke text-sm md:text-base">
         Tres áreas, un mismo estándar de calidad: gráfica, cartelería e indumentaria.
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-3 gap-px bg-line">
+    <div class="grid lg:grid-cols-3 gap-6">
       {categories.map((c, i) => (
         <div
-          class="group relative bg-ink p-8 md:p-10 flex flex-col overflow-hidden"
+          class="group relative bg-surface border border-line p-8 md:p-9 flex flex-col transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-brand-red/40 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"
           data-reveal
-          style={`transition-delay:${i * 100}ms`}
+          style={`transition-delay:${i * 90}ms`}
         >
-          <div class="absolute inset-0 bg-gradient-to-b from-brand-red/0 to-brand-red/0 group-hover:from-brand-red/10 group-hover:to-transparent transition-all duration-500"></div>
+          <span class="absolute top-0 left-0 h-[2px] w-0 bg-brand-red transition-[width] duration-500 ease-out group-hover:w-full"></span>
 
-          <span class="absolute top-4 left-4 w-3 h-3 border-t-2 border-l-2 border-line group-hover:border-brand-red transition-colors duration-300"></span>
-          <span class="absolute bottom-4 right-4 w-3 h-3 border-b-2 border-r-2 border-line group-hover:border-brand-red transition-colors duration-300"></span>
-
-          <div class="relative">
-            <span class="font-mono text-smoke text-sm">{c.num}</span>
-            <h3 class="font-display text-3xl md:text-4xl text-white mt-4 group-hover:text-brand-red transition-colors duration-300">
+          <div>
+            <span class="font-mono text-smoke-dim text-xs">{c.num}</span>
+            <h3 class="font-display text-3xl md:text-[2.1rem] text-white mt-4">
               {c.title}
             </h3>
-            <p class="font-mono text-xs text-brand-red mt-2 tracking-wide uppercase">{c.tagline}</p>
+            <p class="eyebrow mt-2">{c.tagline}</p>
             <p class="text-smoke text-sm leading-relaxed mt-5">{c.desc}</p>
           </div>
 
-          <div class="relative mt-7 h-px bg-line overflow-hidden">
-            <div class="h-full w-0 bg-brand-red group-hover:w-full transition-all duration-500"></div>
-          </div>
+          <div class="mt-7 h-px bg-line"></div>
 
-          <ul class="relative mt-7 flex flex-wrap gap-2">
+          <ul class="mt-7 flex flex-wrap gap-2">
             {c.items.map((item) => (
-              <li class="font-mono text-xs text-white/70 border border-line px-3 py-1.5 group-hover:border-brand-red/50 transition-colors duration-300">
+              <li class="font-mono text-[11px] text-smoke border border-line px-3 py-1.5 transition-colors duration-300 group-hover:border-smoke-dim group-hover:text-white/80">
                 {item}
               </li>
             ))}
