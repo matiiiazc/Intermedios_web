@@ -7,8 +7,8 @@ export interface Props {
 }
 
 const {
-  title = "Intermedios |  Grafica y Cartelería ",
-  description = "Especialistas en cartelería: letreros, letras corpóreas, gráfica vehicular, vinilo impreso y señalización.",
+  title = "Intermedios | Grafica, Carteleria y Indumentaria",
+  description = "Especialistas en cartelería: letreros, letras corpóreas, lonas, vinilo impreso y iluminados.",
 } = Astro.props;
 ---
 
@@ -23,14 +23,25 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
     <slot name="head" />
   </head>
   <body class="bg-ink text-white font-body antialiased overflow-x-hidden">
-    <slot />
+    <!-- lomo vertical: el "spine" de la ficha de producción -->
+    <div class="hidden lg:flex fixed left-0 top-0 h-full w-14 flex-col items-center justify-between py-10 z-40 border-r border-line">
+      <span class="w-px flex-1 bg-line"></span>
+      <span class="spine font-mono text-[10px] tracking-[0.35em] text-smoke-dim select-none">
+        INTERMEDIOS GRÁFICA
+      </span>
+      <span class="w-1.5 h-1.5 bg-brand-red"></span>
+    </div>
+
+    <div class="lg:pl-14">
+      <slot />
+    </div>
 
     <script>
       // Scroll reveal

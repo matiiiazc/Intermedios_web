@@ -34,45 +34,44 @@ const categories = [
 ];
 ---
 
-<section id="servicios" class="relative py-28 border-t border-line">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="flex items-end justify-between flex-wrap gap-6 mb-16" data-reveal>
+<section id="servicios" class="relative py-24 md:py-32 border-t border-line">
+  <div class="max-w-6xl mx-auto px-6 lg:px-10">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-14" data-reveal>
       <div>
         <p class="eyebrow mb-4">Servicios</p>
-        <h2 class="section-title">LO QUE HACEMOS</h2>
+        <h2 class="font-display text-4xl md:text-6xl text-white leading-[0.95]">LO QUE HACEMOS</h2>
       </div>
       <p class="max-w-sm text-smoke text-sm md:text-base">
         Tres áreas, un mismo estándar de calidad: gráfica, cartelería e indumentaria.
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-3 gap-6">
+    <div class="divide-y divide-dashed divide-line">
       {categories.map((c, i) => (
         <div
-          class="group relative bg-surface border border-line p-8 md:p-9 flex flex-col transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-brand-red/40 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.6)]"
+          class="py-10 md:py-12 grid md:grid-cols-12 gap-6 md:gap-10 items-start"
           data-reveal
           style={`transition-delay:${i * 90}ms`}
         >
-          <span class="absolute top-0 left-0 h-[2px] w-0 bg-brand-red transition-[width] duration-500 ease-out group-hover:w-full"></span>
-
-          <div>
-            <span class="font-mono text-smoke-dim text-xs">{c.num}</span>
-            <h3 class="font-display text-3xl md:text-[2.1rem] text-white mt-4">
-              {c.title}
-            </h3>
-            <p class="eyebrow mt-2">{c.tagline}</p>
-            <p class="text-smoke text-sm leading-relaxed mt-5">{c.desc}</p>
+          <div class="md:col-span-4 flex items-baseline gap-4">
+            <span class="font-mono text-smoke-dim text-sm shrink-0">{c.num}</span>
+            <div>
+              <h3 class="font-display text-3xl md:text-[2.4rem] leading-none text-white">{c.title}</h3>
+              <p class="eyebrow mt-3">{c.tagline}</p>
+            </div>
           </div>
 
-          <div class="mt-7 h-px bg-line"></div>
-
-          <ul class="mt-7 flex flex-wrap gap-2">
-            {c.items.map((item) => (
-              <li class="font-mono text-[11px] text-smoke border border-line px-3 py-1.5 transition-colors duration-300 group-hover:border-smoke-dim group-hover:text-white/80">
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div class="md:col-span-8">
+            <p class="text-smoke text-sm leading-relaxed max-w-md mb-6">{c.desc}</p>
+            <ul class="flex flex-wrap gap-x-7 gap-y-2.5">
+              {c.items.map((item) => (
+                <li class="flex items-center gap-2 font-mono text-xs text-smoke">
+                  <span class="text-brand-red">/</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
     </div>

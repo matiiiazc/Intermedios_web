@@ -11,47 +11,47 @@ const tags = [
 ];
 ---
 
-<section id="inicio" class="relative min-h-screen flex flex-col justify-center pt-28 pb-16 overflow-hidden">
-  <!-- fondo: una sola mancha de luz, muy sutil -->
+<section id="inicio" class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
   <div class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-32 right-[-10%] w-[620px] h-[620px] bg-brand-red/[0.08] rounded-full blur-[160px]"></div>
+    <div class="absolute -top-24 right-[-8%] w-[520px] h-[520px] bg-brand-red/[0.07] rounded-full blur-[150px]"></div>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 w-full">
-    <p class="eyebrow mb-6" data-reveal>Gráfica · Cartelería · Indumentaria</p>
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-10 w-full grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7">
+      <p class="eyebrow mb-6" data-reveal>Gráfica · Cartelería · Indumentaria</p>
 
-    <h1 class="font-display leading-[0.92] text-white" data-reveal style="font-size: clamp(2.75rem, 9vw, 7rem);">
-      <span class="block">TODO EN UN</span>
-      <span class="block text-brand-red">SOLO LUGAR</span>
-    </h1>
+      <h1 class="font-display leading-[0.9] text-white" data-reveal style="font-size: clamp(2.75rem, 8vw, 6.5rem);">
+        <span class="block">TODO EN UN</span>
+        <span class="block text-brand-red">SOLO LUGAR</span>
+      </h1>
 
-    <p class="mt-8 max-w-xl text-smoke text-base md:text-lg leading-relaxed" data-reveal style="transition-delay:100ms">
-      Gráfica, cartelería e indumentaria en un solo lugar: diseñamos, imprimimos y
-      fabricamos todo lo que tu marca necesita para verse bien, con más de 10 años
-      de trayectoria en el rubro.
-    </p>
+      <p class="mt-8 max-w-lg text-smoke text-base md:text-lg leading-relaxed" data-reveal style="transition-delay:100ms">
+        Gráfica, cartelería e indumentaria en un solo lugar: diseñamos, imprimimos y
+        fabricamos todo lo que tu marca necesita para verse bien, con más de 10 años
+        de trayectoria en el rubro.
+      </p>
 
-    <div class="mt-10 flex flex-wrap gap-4" data-reveal style="transition-delay:180ms">
-      <a href="#servicios" class="btn-primary">Nuestros servicios</a>
-      <a href="https://wa.me/5493512288814" target="_blank" rel="noopener noreferrer" class="btn-outline">
-        Hablemos por WhatsApp
-      </a>
+      <div class="mt-10 flex flex-wrap gap-4" data-reveal style="transition-delay:180ms">
+        <a href="#servicios" class="btn-primary">Nuestros servicios</a>
+        <a href="https://wa.me/5493512288814" target="_blank" rel="noopener noreferrer" class="btn-outline">
+          Hablemos por WhatsApp
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- franja de servicios: fina, lenta, con desvanecido en los bordes -->
-  <div
-    class="relative mt-20 border-y border-line py-4 overflow-hidden"
-    data-reveal
-    style="transition-delay:260ms; -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);"
-  >
-    <div class="flex w-max animate-marquee">
-      {[...tags, ...tags].map((tag) => (
-        <span class="flex items-center font-mono text-xs md:text-sm tracking-[0.2em] text-smoke px-8 whitespace-nowrap">
-          {tag}
-          <span class="text-brand-red ml-8">/</span>
-        </span>
-      ))}
+    <!-- ficha técnica: mismo contenido que antes, en formato de planilla -->
+    <div class="lg:col-span-4 lg:col-start-9" data-reveal="right" style="transition-delay:220ms">
+      <div class="relative border border-line bg-surface/60 p-7">
+        <p class="eyebrow mb-6">Ficha técnica</p>
+        <ul class="space-y-3">
+          {tags.map((tag, i) => (
+            <li class="flex items-baseline gap-3 font-mono text-xs text-smoke border-b border-dashed border-line-soft pb-3 last:border-0 last:pb-0">
+              <span class="text-brand-red">{String(i + 1).padStart(2, "0")}</span>
+              {tag}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 </section>

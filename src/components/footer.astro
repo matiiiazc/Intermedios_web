@@ -2,8 +2,11 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative border-t border-line py-14">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+<footer
+  class="relative py-14"
+  style="border-top: 1px dashed var(--color-line);"
+>
+  <div class="max-w-6xl mx-auto px-6 lg:px-10">
     <div class="grid md:grid-cols-3 gap-10 mb-12">
       <div>
         <span class="font-display text-2xl text-white">INTERMEDIOS </span>
@@ -47,7 +50,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="border-t border-line pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style="border-top: 1px solid var(--color-line);">
       <p class="text-smoke-dim text-xs">© {year} Intermedios grafica — Todos los derechos reservados.</p>
     </div>
   </div>
