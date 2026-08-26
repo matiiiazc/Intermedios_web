@@ -7,9 +7,49 @@ export interface Props {
 }
 
 const {
-  title = "Intermedios | Grafica, Carteleria y Indumentaria",
-  description = "Especialistas en cartelería: letreros, letras corpóreas, lonas, vinilo impreso y iluminados.",
+  title = "Intermedios Gráfica | Cartelería, Impresiones e Indumentaria en San Luis",
+  description = "Especialistas en gráfica, cartelería e indumentaria en San Luis: letreros, letras corpóreas, lonas, vinilo impreso, iluminados, estampado DTF y sublimación. Más de 10 años de trayectoria.",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://intermediosgrafica.com.ar");
+const ogImageURL = new URL("/favicon.svg", "https://intermediosgrafica.com.ar");
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Intermedios Gráfica",
+  description: "Empresa especializada en gráfica, cartelería e indumentaria. Diseño, impresión, fabricación e instalación de cartelería y prendas.",
+  url: "https://intermediosgrafica.com.ar",
+  telephone: "+54-2634-47-6887",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "San Luis",
+    addressCountry: "AR",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "San Luis",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios de Gráfica y Cartelería",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Diseño Gráfico" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Impresiones" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cartelería" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Letras Corpóreas" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Lonas y Vinilos" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Carteles Iluminados" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Estampado DTF" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sublimación" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Indumentaria" } },
+    ],
+  },
+  sameAs: [
+    "https://www.instagram.com/zip.graphic/",
+    "https://www.facebook.com/graficazip/",
+  ],
+};
 ---
 
 <!doctype html>
@@ -18,7 +58,34 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Intermedios Gráfica" />
     <title>{title}</title>
+
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Intermedios Gráfica" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
