@@ -1,11 +1,181 @@
 ---
+// Reemplazá estos datos por los clientes reales.
+// Cada cliente tiene 4 fotos (podés poner rutas locales como "/clientes/cliente1-1.jpg")
+const clients = Array.from({ length: 12 }).map((_, i) => ({
+  photos: [
+    `https://picsum.photos/seed/cliente${i + 1}a/800/600`,
+    `https://picsum.photos/seed/cliente${i + 1}b/800/600`,
+    `https://picsum.photos/seed/cliente${i + 1}c/800/600`,
+    `https://picsum.photos/seed/cliente${i + 1}d/800/600`,
+  ],
+  name: `Cliente ${i + 1}`,
+  summary: "Breve resumen del trabajo o rubro del cliente.",
+}));
 ---
 
 <section id="clientes" class="relative py-16 border-t border-line overflow-hidden">
   <div
-    class="max-w-6xl mx-auto px-6 lg:px-10 py-8 border-y"
+    class="max-w-6xl mx-auto px-6 lg:px-10 py-12 border-y"
     style="border-image: repeating-linear-gradient(90deg, var(--color-line) 0 6px, transparent 6px 12px) 1;"
   >
-    <p class="eyebrow text-center">Confían en nosotros</p>
+    <p class="eyebrow text-center mb-10">Confían en nosotros</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {clients.map((client, ci) => (
+        <div
+          class="group overflow-hidden bg-surface border border-line shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] transition-colors duration-300 hover:border-brand-red"
+          data-reveal={ci % 2 === 0 ? "left" : "right"}
+        >
+          <button
+            type="button"
+            class="client-photo-btn relative w-full aspect-[4/3] overflow-hidden block cursor-pointer"
+            data-client-index={ci}
+            aria-label={`Ver fotos de ${client.name} en grande`}
+          >
+            {client.photos.map((src, pi) => (
+              <img
+                src={src}
+                alt={`${client.name} - foto ${pi + 1}`}
+                class="client-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out"
+                style={`opacity: ${pi === 0 ? 1 : 0};`}
+                loading={pi === 0 ? "eager" : "lazy"}
+              />
+            ))}
+          </button>
+          <div class="p-6 text-center">
+            <p class="font-display text-2xl md:text-3xl tracking-wide text-white">
+              {client.name}
+            </p>
+            <p class="font-mono text-sm text-smoke-dim mt-2 leading-snug">
+              {client.summary}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Lightbox -->
+    <div
+      id="client-lightbox"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/95 backdrop-blur px-4"
+    >
+      <button
+        id="lightbox-close"
+        type="button"
+        aria-label="Cerrar"
+        class="absolute top-6 right-6 text-white/70 hover:text-white text-3xl leading-none"
+      >
+        ✕
+      </button>
+
+      <button
+        id="lightbox-prev"
+        type="button"
+        aria-label="Foto anterior"
+        class="absolute left-3 md:left-8 w-11 h-11 md:w-14 md:h-14 flex items-center justify-center border border-line text-white/80 hover:text-white hover:border-brand-red transition-colors duration-300"
+      >
+        &#10094;
+      </button>
+
+      <div class="max-w-3xl w-full">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="w-full max-h-[70vh] object-contain border border-line"
+        />
+        <p id="lightbox-name" class="font-display text-xl md:text-2xl text-white text-center mt-4"></p>
+        <p id="lightbox-summary" class="font-mono text-sm text-smoke-dim text-center mt-1"></p>
+        <p id="lightbox-counter" class="font-mono text-xs text-smoke-dim text-center mt-2"></p>
+      </div>
+
+      <button
+        id="lightbox-next"
+        type="button"
+        aria-label="Foto siguiente"
+        class="absolute right-3 md:right-8 w-11 h-11 md:w-14 md:h-14 flex items-center justify-center border border-line text-white/80 hover:text-white hover:border-brand-red transition-colors duration-300"
+      >
+        &#10095;
+      </button>
+    </div>
   </div>
 </section>
+
+<script define:vars={{ clients }}>
+  // --- Rotación automática de las 4 fotos en cada tarjeta (cada 2s) ---
+  document.querySelectorAll(".client-photo-btn").forEach((btn) => {
+    const slides = btn.querySelectorAll(".client-slide");
+    let current = 0;
+    setInterval(() => {
+      const next = (current + 1) % slides.length;
+      slides[current].style.opacity = "0";
+      slides[next].style.opacity = "1";
+      current = next;
+    }, 2000);
+  });
+
+  // --- Lightbox: navega entre las 4 fotos del cliente tocado ---
+  const lightbox = document.getElementById("client-lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxName = document.getElementById("lightbox-name");
+  const lightboxSummary = document.getElementById("lightbox-summary");
+  const lightboxCounter = document.getElementById("lightbox-counter");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+  const closeBtn = document.getElementById("lightbox-close");
+
+  let clientIndex = 0;
+  let photoIndex = 0;
+
+  const render = () => {
+    const client = clients[clientIndex];
+    lightboxImg.src = client.photos[photoIndex];
+    lightboxImg.alt = `${client.name} - foto ${photoIndex + 1}`;
+    lightboxName.textContent = client.name;
+    lightboxSummary.textContent = client.summary;
+    lightboxCounter.textContent = `${photoIndex + 1} / ${client.photos.length}`;
+  };
+
+  const open = (ci) => {
+    clientIndex = ci;
+    photoIndex = 0;
+    render();
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+  };
+
+  const close = () => {
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+  };
+
+  document.querySelectorAll(".client-photo-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      open(Number(btn.dataset.clientIndex));
+    });
+  });
+
+  prevBtn?.addEventListener("click", () => {
+    const total = clients[clientIndex].photos.length;
+    photoIndex = (photoIndex - 1 + total) % total;
+    render();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    const total = clients[clientIndex].photos.length;
+    photoIndex = (photoIndex + 1) % total;
+    render();
+  });
+
+  closeBtn?.addEventListener("click", close);
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (lightbox?.classList.contains("hidden")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") prevBtn?.click();
+    if (e.key === "ArrowRight") nextBtn?.click();
+  });
+</script>
