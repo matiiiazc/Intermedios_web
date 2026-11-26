@@ -1,16 +1,63 @@
 ---
-// Reemplazá estos datos por los clientes reales.
-// Cada cliente tiene 4 fotos (podés poner rutas locales como "/clientes/cliente1-1.jpg")
-const clients = Array.from({ length: 12 }).map((_, i) => ({
-  photos: [
-    `https://picsum.photos/seed/cliente${i + 1}a/800/600`,
-    `https://picsum.photos/seed/cliente${i + 1}b/800/600`,
-    `https://picsum.photos/seed/cliente${i + 1}c/800/600`,
-    `https://picsum.photos/seed/cliente${i + 1}d/800/600`,
-  ],
-  name: `Cliente ${i + 1}`,
-  summary: "Breve resumen del trabajo o rubro del cliente.",
-}));
+const base = "/"; // si las ponés en public/trabajos/, cambiá a "/trabajos/"
+
+const clients = [
+  {
+    name: "3D",
+    summary: "Letras y piezas corpóreas con volumen.",
+    photos: ["3d_1.JPEG", "3d_2.JPEG", "3d_3.JPEG", "3d_4.JPEG"],
+  },
+  {
+    name: "Acrílico",
+    summary: "Carteles y piezas en acrílico cortado.",
+    photos: ["Acrilico_1.jpg", "Acrilico_2.jpg", "Acrilico_3.jpg"],
+  },
+  {
+    name: "Chapa",
+    summary: "Carteles en chapa para exterior.",
+    photos: ["Chapa_1.JPEG", "Chapa_2.JPEG", "Chapa_3.JPEG", "Chapa_4.JPEG"],
+  },
+  {
+    name: "Corpórea",
+    summary: "Letras corpóreas para fachadas e interiores.",
+    photos: ["Corporea_1.JPEG", "Corporea_2.jpg", "Corporea_3.jpg", "Corporea_4.jpg"],
+  },
+  {
+    name: "Gigantografía",
+    summary: "Impresiones de gran formato.",
+    photos: ["Gigantografia_1.JPEG", "Gigantografia_2.jpg", "Gigantografia_3.jpg", "Gigantografia_4.jpg"],
+  },
+  {
+    name: "Gráfica general",
+    summary: "Folletería, tarjetas y piezas impresas.",
+    photos: ["Grafica_general_1.jpg", "Grafica_general_2.jpg", "Grafica_general_3.jpg", "Grafica_general_4.jpg"],
+  },
+  {
+    name: "Indumentaria",
+    summary: "Estampado y personalización de prendas.",
+    photos: ["Indumentaria_1.jpg", "Indumentaria_2.jpg", "Indumentaria_3.jpg", "Indumentaria_4.jpg"],
+  },
+  {
+    name: "Neón",
+    summary: "Carteles de neón LED a medida.",
+    photos: ["Neon_1.Jpg", "Neon_2.jpg", "Neon_3.jpg", "Neon_4.jpg"],
+  },
+  {
+    name: "Pastilla",
+    summary: "Pastillas y logos para fachadas.",
+    photos: ["Pastilla_1.JPEG", "Pastilla_2.jpg", "Pastilla_3.jpg", "Pastilla_4.JPEG"],
+  },
+  {
+    name: "Ploteo",
+    summary: "Ploteo de vidrieras y vehículos.",
+    photos: ["Ploteo_1.jpg", "Ploteo_2.jpg", "Ploteo_3.jpg", "Ploteo_4.jpg"],
+  },
+  {
+    name: "Stickers",
+    summary: "Stickers y etiquetas troqueladas.",
+    photos: ["Stickers_1.jpg", "Stickers_2.jpg", "Stickers_3.jpg", "Stickers_4.jpg"],
+  },
+].map((c) => ({ ...c, photos: c.photos.map((p) => base + p) }));
 ---
 
 <section id="clientes" class="relative py-16 border-t border-line overflow-hidden">
@@ -28,7 +75,7 @@ const clients = Array.from({ length: 12 }).map((_, i) => ({
         >
           <button
             type="button"
-            class="client-photo-btn relative w-full aspect-[4/3] overflow-hidden block cursor-pointer"
+            class="client-photo-btn relative w-full aspect-4/3 overflow-hidden block cursor-pointer"
             data-client-index={ci}
             aria-label={`Ver fotos de ${client.name} en grande`}
           >
